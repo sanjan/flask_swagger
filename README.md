@@ -89,20 +89,36 @@ paths:
 
 #### Step 5: Return `swaggerui.html` with flask render_template in your preferred route
 
-- Create `app.py` in your project directory with the following code
+- Create `hello_api.py` in your project directory with the following code
 
 ```python
 
 from flask import Flask, request, jsonify, render_template
+
+
 app = Flask(__name__)
+
+@app.route('/')
+def get_root():
+    print('sending root')
+    return render_template('index.html')
 
 @app.route('/api/docs')
 def get_docs():
+    print('sending docs')
     return render_template('swaggerui.html')
+
+
+@app.route('/api')
+def get_api():
+    hello_dict = {'en': 'Hello', 'es': 'Hola'}
+    lang = request.args.get('lang')
+    return jsonify(hello_dict[lang])
+
 
 app.run(use_reloader=True, debug=False)
 
 ```
 
-- Run the app with command: `python3 app.py` from your project directory
+- Run the app with command: `python3 hello_api.py` from your project directory
 - Your SwaggerUI documentation shoule be accessible on http://localhost:5000/api/docs
