@@ -1,0 +1,43 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Hello API",
+    "description": "An API to return hello in requested language"
+  },
+  "paths": {
+    "/api": {
+      "get": {
+        "tags": [
+          "Hello"
+        ],
+        "description": "Returns hello in specified language",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "lang",
+            "required": true,
+            "description": "language",
+            "schema": {
+              "type": "string",
+              "example": "es"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "hello in the requested language",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "hola"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
